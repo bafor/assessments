@@ -9,7 +9,8 @@ readonly class Evaluation
 
     public function __construct(
         private EvaluationDate $evaluationDate,
-        private Supervisor         $supervisor
+        private Supervisor         $supervisor,
+        public EvaluationResult   $evaluationResult
     )
     {
     }

@@ -5,6 +5,7 @@ namespace Tests\Util;
 
 use System\Evaluation;
 use System\EvaluationDate;
+use System\EvaluationResult;
 use System\Supervisor;
 
 class EvaluationBuilder
@@ -12,14 +13,17 @@ class EvaluationBuilder
     private Supervisor $supervisor;
 
     private function __construct(
-        private \DateTimeImmutable $evaluationDate = new \DateTimeImmutable()
+        private \DateTimeImmutable $evaluationDate = new \DateTimeImmutable(),
+        private EvaluationResult   $evaluationResult = EvaluationResult::Positive
     )
     {
-        $this->supervisor = new class() implements Supervisor {
+        $this->supervisor       = new class() implements Supervisor {
         };
+        $this->evaluationResult = EvaluationResult::Positive;
     }
 
-    public static function new(): self
+    public
+    static function new(): self
     {
         return new self();
     }
@@ -27,8 +31,9 @@ class EvaluationBuilder
     public function build(): Evaluation
     {
         return new Evaluation(
-            evaluationDate: new EvaluationDate($this->evaluationDate),
-            supervisor    : $this->supervisor
+            evaluationDate  : new EvaluationDate($this->evaluationDate),
+            supervisor      : $this->supervisor,
+            evaluationResult: $this->evaluationResult
         );
     }
 }

@@ -5,6 +5,7 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use System\Evaluation;
+use System\EvaluationResult;
 use System\Supervisor;
 use Tests\Util\EvaluationDateBuilder;
 
@@ -14,13 +15,17 @@ class EvaluationTest extends TestCase
     /** @test */
     public function shouldCreate(): void
     {
+        $evaluationResult = EvaluationResult::Positive;
+
         $evaluation = new Evaluation(
-            evaluationDate: EvaluationDateBuilder::new()->now()->build(),
-            supervisor    : $this->mockSupervisor()
+            evaluationDate  : EvaluationDateBuilder::new()->now()->build(),
+            supervisor      : $this->mockSupervisor(),
+            evaluationResult: $evaluationResult
         );
 
         self::assertInstanceOf(Evaluation::class, $evaluation);
         self::assertFalse($evaluation->isExpired());
+        self::assertSame($evaluationResult, $evaluation->evaluationResult);
     }
 
     /** @test */
@@ -31,8 +36,9 @@ class EvaluationTest extends TestCase
                                                ->build();
 
         $evaluation = new Evaluation(
-            evaluationDate: $evaluationDate,
-            supervisor    : $this->mockSupervisor()
+            evaluationDate  : $evaluationDate,
+            supervisor      : $this->mockSupervisor(),
+            evaluationResult: EvaluationResult::Positive
         );
 
         self::assertFalse($evaluation->isExpired());
@@ -46,8 +52,9 @@ class EvaluationTest extends TestCase
                                                ->build();
 
         $evaluation = new Evaluation(
-            evaluationDate: $evaluationDate,
-            supervisor    : $this->mockSupervisor()
+            evaluationDate  : $evaluationDate,
+            supervisor      : $this->mockSupervisor(),
+            evaluationResult: EvaluationResult::Positive
         );
 
         self::assertTrue($evaluation->isExpired());
