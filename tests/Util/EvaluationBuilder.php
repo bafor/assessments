@@ -17,15 +17,20 @@ class EvaluationBuilder
         private EvaluationResult   $evaluationResult = EvaluationResult::Positive
     )
     {
-        $this->supervisor       = new class() implements Supervisor {
+        $this->supervisor = new class() implements Supervisor {
         };
-        $this->evaluationResult = EvaluationResult::Positive;
+
     }
 
-    public
-    static function new(): self
+    public static function new(): self
     {
         return new self();
+    }
+
+    public function withEvaluationDate(EvaluationDate $evaluationDate): self
+    {
+        $this->evaluationDate = $evaluationDate->evaluationDate;
+        return $this;
     }
 
     public function build(): Evaluation

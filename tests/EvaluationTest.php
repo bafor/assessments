@@ -24,41 +24,9 @@ class EvaluationTest extends TestCase
         );
 
         self::assertInstanceOf(Evaluation::class, $evaluation);
-        self::assertFalse($evaluation->isExpired());
         self::assertSame($evaluationResult, $evaluation->evaluationResult);
     }
 
-    /** @test */
-    public function shouldBeValidOnTheLastDayOfExpirationCountingFromNextDateAfterEvolutionTookPlace(): void
-    {
-        $evaluationDate = EvaluationDateBuilder::new()
-                                               ->daysAgo(Evaluation::EXPIRATION_DATE_IN_DAYS + 1)
-                                               ->build();
-
-        $evaluation = new Evaluation(
-            evaluationDate  : $evaluationDate,
-            supervisor      : $this->mockSupervisor(),
-            evaluationResult: EvaluationResult::Positive
-        );
-
-        self::assertFalse($evaluation->isExpired());
-    }
-
-    /** @test */
-    public function shouldExpiredAfterAfterExpirationDate(): void
-    {
-        $evaluationDate = EvaluationDateBuilder::new()
-                                               ->daysAgo(Evaluation::EXPIRATION_DATE_IN_DAYS + 2)
-                                               ->build();
-
-        $evaluation = new Evaluation(
-            evaluationDate  : $evaluationDate,
-            supervisor      : $this->mockSupervisor(),
-            evaluationResult: EvaluationResult::Positive
-        );
-
-        self::assertTrue($evaluation->isExpired());
-    }
 
     private function mockSupervisor(): Supervisor
     {

@@ -35,8 +35,6 @@ class EvaluationDateBuilder
 
     public function build(): EvaluationDate
     {
-        return new EvaluationDate(
-            $this->evaluationDate
-        );
+        return new EvaluationDate($this->evaluationDate);
     }
 }
