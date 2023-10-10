@@ -5,6 +5,8 @@ namespace System;
 
 readonly class Evaluation
 {
+    public const EXPIRATION_DATE_IN_DAYS = 365;
+
     public function __construct(
         private \DateTimeImmutable $evaluationDate,
         private Supervisor $supervisor
@@ -14,6 +16,6 @@ readonly class Evaluation
 
     public function isExpired(): bool
     {
-        return false;
+        return $this->evaluationDate->diff(new \DateTimeImmutable())->days > 366;
     }
 }
