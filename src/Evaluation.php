@@ -5,8 +5,10 @@ namespace System;
 
 readonly class Evaluation
 {
-
-    public function __construct()
+    public function __construct(
+        private \DateTimeImmutable $evaluationDate,
+        private Supervisor $supervisor
+    )
     {
     }
 }

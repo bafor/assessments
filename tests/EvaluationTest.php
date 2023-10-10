@@ -6,6 +6,7 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use System\Assessment;
 use System\Evaluation;
+use System\Supervisor;
 
 class EvaluationTest extends TestCase
 {
@@ -13,8 +14,16 @@ class EvaluationTest extends TestCase
     /** @test */
     public function shouldCreate(): void
     {
-        $evaluation = new Evaluation();
+        $evaluation = new Evaluation(
+            new \DateTimeImmutable(),
+            $this->mockSupervisor()
+        );
 
         self::assertInstanceOf(Evaluation::class, $evaluation);
+    }
+
+    private function mockSupervisor(): Supervisor
+    {
+        return new class() implements Supervisor {};
     }
 }
