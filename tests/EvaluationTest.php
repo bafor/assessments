@@ -15,11 +15,12 @@ class EvaluationTest extends TestCase
     public function shouldCreate(): void
     {
         $evaluation = new Evaluation(
-            new \DateTimeImmutable(),
-            $this->mockSupervisor()
+            evaluationDate: new \DateTimeImmutable(),
+            supervisor    : $this->mockSupervisor()
         );
 
         self::assertInstanceOf(Evaluation::class, $evaluation);
+        self::assertFalse($evaluation->isExpired());
     }
 
     private function mockSupervisor(): Supervisor

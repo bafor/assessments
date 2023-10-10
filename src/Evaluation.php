@@ -11,4 +11,9 @@ readonly class Evaluation
     )
     {
     }
+
+    public function isExpired(): bool
+    {
+        return false;
+    }
 }

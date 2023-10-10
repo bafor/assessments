@@ -5,7 +5,7 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use System\Assessment;
-use System\Evaluation;
+use Tests\Util\EvaluationBuilder;
 
 class AssessmentTest extends TestCase
 {
@@ -13,7 +13,7 @@ class AssessmentTest extends TestCase
     /** @test */
     public function shouldCreate(): void
     {
-        $assessment = new Assessment(new Evaluation());
+        $assessment = new Assessment(EvaluationBuilder::new()->build());
 
         self::assertInstanceOf(Assessment::class, $assessment);
     }
