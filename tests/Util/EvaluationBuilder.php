@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Util;
 
 use System\Evaluation;
+use System\EvaluationDate;
 use System\Supervisor;
 
 class EvaluationBuilder
@@ -26,7 +27,7 @@ class EvaluationBuilder
     public function build(): Evaluation
     {
         return new Evaluation(
-            evaluationDate: $this->evaluationDate,
+            evaluationDate: new EvaluationDate($this->evaluationDate),
             supervisor    : $this->supervisor
         );
     }

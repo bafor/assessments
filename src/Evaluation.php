@@ -8,18 +8,14 @@ readonly class Evaluation
     public const EXPIRATION_DATE_IN_DAYS = 365;
 
     public function __construct(
-        private \DateTimeImmutable $evaluationDate,
+        private EvaluationDate $evaluationDate,
         private Supervisor         $supervisor
     )
     {
-        if ($evaluationDate > new \DateTimeImmutable('now')) {
-            throw new \InvalidArgumentException('Evaluation date cannot be in the future');
-        }
-
     }
 
     public function isExpired(): bool
     {
-        return $this->evaluationDate->diff(new \DateTimeImmutable())->days > 366;
+        return $this->evaluationDate->evaluationDate->diff(new \DateTimeImmutable())->days > 366;
     }
 }

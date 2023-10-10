@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use System\Assessment;
 use System\Evaluation;
 use System\Supervisor;
+use Tests\Util\EvaluationDateBuilder;
 
 class EvaluationTest extends TestCase
 {
@@ -15,7 +15,7 @@ class EvaluationTest extends TestCase
     public function shouldCreate(): void
     {
         $evaluation = new Evaluation(
-            evaluationDate: new \DateTimeImmutable(),
+            evaluationDate: EvaluationDateBuilder::new()->now()->build(),
             supervisor    : $this->mockSupervisor()
         );
 
@@ -26,7 +26,9 @@ class EvaluationTest extends TestCase
     /** @test */
     public function shouldBeValidOnTheLastDayOfExpirationCountingFromNextDateAfterEvolutionTookPlace(): void
     {
-        $evaluationDate = new \DateTimeImmutable(Evaluation::EXPIRATION_DATE_IN_DAYS + 1 . ' days ago');
+        $evaluationDate = EvaluationDateBuilder::new()
+                                               ->daysAgo(Evaluation::EXPIRATION_DATE_IN_DAYS + 1)
+                                               ->build();
 
         $evaluation = new Evaluation(
             evaluationDate: $evaluationDate,
@@ -39,28 +41,21 @@ class EvaluationTest extends TestCase
     /** @test */
     public function shouldExpiredAfterAfterExpirationDate(): void
     {
+        $evaluationDate = EvaluationDateBuilder::new()
+                                               ->daysAgo(Evaluation::EXPIRATION_DATE_IN_DAYS + 2)
+                                               ->build();
+
         $evaluation = new Evaluation(
-            evaluationDate: new \DateTimeImmutable(Evaluation::EXPIRATION_DATE_IN_DAYS + 2 . ' days ago'),
+            evaluationDate: $evaluationDate,
             supervisor    : $this->mockSupervisor()
         );
 
         self::assertTrue($evaluation->isExpired());
     }
 
-    /** @test */
-    public function shouldNotHaveTookPlaceInTheFuture(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        new Evaluation(
-            evaluationDate: new \DateTimeImmutable('tomorrow'),
-            supervisor    : $this->mockSupervisor()
-        );
-
-    }
-
     private function mockSupervisor(): Supervisor
     {
-        return new class() implements Supervisor {};
+        return new class() implements Supervisor {
+        };
     }
 }
