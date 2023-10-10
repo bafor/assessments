@@ -1,0 +1,21 @@
+{
+  "name": "bafor/assessments",
+  "type": "project",
+  "require": {
+    "php": "^8.2",
+    "ext-zip": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "System\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}
