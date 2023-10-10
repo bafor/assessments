@@ -7,14 +7,14 @@ use PHPUnit\Framework\TestCase;
 use System\Assessment;
 use System\Evaluation;
 
-class AssessmentTest extends TestCase
+class EvaluationTest extends TestCase
 {
 
     /** @test */
     public function shouldCreate(): void
     {
-        $assessment = new Assessment(new Evaluation());
+        $evaluation = new Evaluation();
 
-        self::assertInstanceOf(Assessment::class, $assessment);
+        self::assertInstanceOf(Evaluation::class, $evaluation);
     }
 }
