@@ -9,9 +9,13 @@ readonly class Evaluation
 
     public function __construct(
         private \DateTimeImmutable $evaluationDate,
-        private Supervisor $supervisor
+        private Supervisor         $supervisor
     )
     {
+        if ($evaluationDate > new \DateTimeImmutable('now')) {
+            throw new \InvalidArgumentException('Evaluation date cannot be in the future');
+        }
+
     }
 
     public function isExpired(): bool

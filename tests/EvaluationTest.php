@@ -45,6 +45,17 @@ class EvaluationTest extends TestCase
         );
 
         self::assertTrue($evaluation->isExpired());
+    }
+
+    /** @test */
+    public function shouldNotHaveTookPlaceInTheFuture(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        new Evaluation(
+            evaluationDate: new \DateTimeImmutable('tomorrow'),
+            supervisor    : $this->mockSupervisor()
+        );
 
     }
 
