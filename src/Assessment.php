@@ -24,7 +24,11 @@ readonly class Assessment
         $this->expirationDate = $evaluationDate->evaluationDate
             ->modify("+" . self::EXPIRATION_DAYS . " days")
             ->setTime(23, 59, 59);
+    }
 
+    public function rating(): EvaluationResult // todo It separated from Evaluation result
+    {
+        return $this->evaluation->evaluationResult;
     }
 
 }

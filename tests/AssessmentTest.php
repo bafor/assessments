@@ -5,6 +5,7 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use System\Assessment;
+use System\EvaluationResult;
 use Tests\Util\EvaluationBuilder;
 use Tests\Util\EvaluationDateBuilder;
 
@@ -18,6 +19,17 @@ class AssessmentTest extends TestCase
 
         self::assertInstanceOf(Assessment::class, $assessment);
         self::assertFalse($assessment->isExpired());
+    }
+
+    /** @test */
+    public function shouldHasRatingBasedOnEvaluationResult(): void
+    {
+        $evaluationResult     = EvaluationResult::Positive;
+        $assessment = new Assessment(EvaluationBuilder::new()->withEvaluationResult($evaluationResult)->build());
+
+        self::assertInstanceOf(Assessment::class, $assessment);
+        self::assertEquals($evaluationResult, $assessment->rating());
+
     }
 
     /** @test */

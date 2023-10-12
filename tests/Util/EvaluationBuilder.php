@@ -27,6 +27,12 @@ class EvaluationBuilder
         return new self();
     }
 
+    public function withEvaluationResult(EvaluationResult $result): self
+    {
+        $this->evaluationResult = $result;
+        return $this;
+    }
+
     public function withEvaluationDate(EvaluationDate $evaluationDate): self
     {
         $this->evaluationDate = $evaluationDate->evaluationDate;
