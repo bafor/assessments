@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Assessment;
 
 use PHPUnit\Framework\TestCase;
+use System\Assessment\Assessment;
 use System\Assessment\SuspendedAssessment;
 use System\Assessment\WithdrawnAssessment;
 use System\LockReason;
@@ -14,13 +15,15 @@ class SuspendedAssessmentTest extends TestCase
     /** @test */
     public function shouldCreate(): void
     {
-        $assessment = new SuspendedAssessment(AssessmentBuilder::new()->build(), new LockReason('very good reason'));
+        $lockReason = new LockReason('very good reason');
+        $assessment = new SuspendedAssessment(AssessmentBuilder::new()->build(), $lockReason);
 
         self::assertInstanceOf(SuspendedAssessment::class, $assessment);
+        self::assertSame($lockReason, $assessment->lockReason);
     }
 
     /** @test */
-    public function itCouldBeWithdraw(): void
+    public function itCanBeWithdraw(): void
     {
         $lockReason = new LockReason('very good reason');
         $assessment = new SuspendedAssessment(AssessmentBuilder::new()->build(), $lockReason);
@@ -31,5 +34,15 @@ class SuspendedAssessmentTest extends TestCase
         self::assertSame($lockReason, $withdrawnAssessment->lockReason);
     }
 
+    /** @test */
+    public function itCanBeUnlocked(): void
+    {
+        // BR 11. Suspended assessment can be unlocked.
+
+        $assessment = new SuspendedAssessment(AssessmentBuilder::new()->build(), new LockReason('very good reason'));
+
+        $unlockedAssessment = $assessment->unlock();
+        self::assertInstanceOf(Assessment::class, $unlockedAssessment);
+    }
 
 }

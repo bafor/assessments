@@ -16,4 +16,9 @@ final readonly class SuspendedAssessment extends AbstractAssessment
     {
         return new WithdrawnAssessment($this, $this->lockReason);
     }
+
+    public function unlock(): Assessment
+    {
+        return new Assessment($this->evaluation);
+    }
 }
