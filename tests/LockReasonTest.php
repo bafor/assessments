@@ -23,7 +23,7 @@ class LockReasonTest extends TestCase
     /** @test */
     public function shouldReasonBeDescriptive(): void
     {
-        // BR16 Assessment lock should contain descriptive information about the operation performed.
+        // BR 16 Assessment lock should contain descriptive information about the operation performed.
 
         $reason = 'xx';
 

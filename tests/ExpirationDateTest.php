@@ -7,9 +7,10 @@ use PHPUnit\Framework\TestCase;
 use System\ExpirationDate;
 use Tests\Util\EvaluationDateBuilder;
 
+// BR9 The assessment has an expiration date of 365 days counting from the day
+// evaluation took place. After it is exceeded, the assessment expires.
 class ExpirationDateTest extends TestCase
 {
-
     /** @test */
     public function shouldCreate(): void
     {

@@ -15,6 +15,8 @@ class EvaluationTest extends TestCase
     /** @test */
     public function shouldCreate(): void
     {
+        // BR 2. The evaluation is carried out by the Supervisor.
+
         $evaluationResult = EvaluationResult::Positive;
 
         $evaluation = new Evaluation(
