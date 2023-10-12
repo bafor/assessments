@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace System;
+namespace System\Evaluation;
+
+use System\Supervisor;
 
 readonly class Evaluation
 {

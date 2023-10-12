@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Tests\Util;
 
-use System\Evaluation;
-use System\EvaluationDate;
-use System\EvaluationResult;
+use System\Evaluation\Evaluation;
+use System\Evaluation\EvaluationDate;
+use System\Evaluation\EvaluationResult;
 use System\Supervisor;
 
 class EvaluationBuilder

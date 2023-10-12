@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace System;
 
+use System\Evaluation\Evaluation;
+use System\Evaluation\EvaluationResult;
+
 readonly abstract class AbstractAssessment
 {
     public function __construct(private Evaluation $evaluation)

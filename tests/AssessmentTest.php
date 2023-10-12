@@ -5,9 +5,8 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use System\Assessment;
-use System\EvaluationResult;
+use System\Evaluation\EvaluationResult;
 use Tests\Util\EvaluationBuilder;
-use Tests\Util\EvaluationDateBuilder;
 
 class AssessmentTest extends TestCase
 {

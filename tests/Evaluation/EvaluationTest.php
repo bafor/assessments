@@ -1,12 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Evaluation;
 
 use PHPUnit\Framework\TestCase;
-use System\Evaluation;
-use System\EvaluationResult;
-use System\Supervisor;
+use System\Evaluation\Evaluation;
+use System\Evaluation\EvaluationResult;
 use Tests\Util\EvaluationDateBuilder;
 use Tests\Util\SupervisorBuilder;
 

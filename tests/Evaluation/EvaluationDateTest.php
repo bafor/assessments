@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Evaluation;
 
 use PHPUnit\Framework\TestCase;
-use System\EvaluationDate;
+use System\Evaluation\EvaluationDate;
 
 class EvaluationDateTest extends TestCase
 {

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace System;
 
+use System\Evaluation\EvaluationDate;
+
 final readonly class ExpirationDate
 {
     public const EXPIRATION_DAYS = 365;

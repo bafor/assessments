@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace System;
 
+use System\Evaluation\Evaluation;
+
 class AssessmentFactory
 {
     public function make(Evaluation $evaluation): AbstractAssessment

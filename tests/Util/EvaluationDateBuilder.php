@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Util;
 
-use System\EvaluationDate;
+use System\Evaluation\EvaluationDate;
 
 class EvaluationDateBuilder
 {
