@@ -1,15 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Assessment;
 
 use PHPUnit\Framework\TestCase;
-use System\ExpiredAssessment;
+use System\Assessment\SuspendedAssessment;
+use System\Assessment\WithdrawnAssessment;
 use System\LockReason;
-use System\SuspendedAssessment;
-use System\WithdrawnAssessment;
 use Tests\Util\AssessmentBuilder;
-use Tests\Util\EvaluationBuilder;
 
 class SuspendedAssessmentTest extends TestCase
 {

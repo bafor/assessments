@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace System;
+namespace System\Assessment;
 
 use System\Evaluation\Evaluation;
 use System\Evaluation\EvaluationResult;

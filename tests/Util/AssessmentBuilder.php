@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Util;
 
-use System\Assessment;
+use System\Assessment\Assessment;
 
 class AssessmentBuilder
 {

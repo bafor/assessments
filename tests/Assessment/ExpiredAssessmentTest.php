@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Assessment;
 
 use PHPUnit\Framework\TestCase;
-use System\ExpiredAssessment;
+use System\Assessment\ExpiredAssessment;
 use Tests\Util\EvaluationBuilder;
 
 class ExpiredAssessmentTest extends TestCase

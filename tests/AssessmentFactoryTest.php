@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use System\AbstractAssessment;
+use System\Assessment\AbstractAssessment;
+use System\Assessment\ExpiredAssessment;
 use System\AssessmentFactory;
-use System\ExpiredAssessment;
 use Tests\Util\EvaluationBuilder;
 use Tests\Util\EvaluationDateBuilder;
 

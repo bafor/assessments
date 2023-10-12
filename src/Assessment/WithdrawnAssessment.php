@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace System;
+namespace System\Assessment;
+
+use System\LockReason;
 
 final readonly class WithdrawnAssessment extends AbstractAssessment
 {
