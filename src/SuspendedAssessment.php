@@ -9,4 +9,9 @@ final readonly class SuspendedAssessment extends AbstractAssessment
     {
         parent::__construct($assessment->evaluation);
     }
+
+    public function withdraw(): WithdrawnAssessment
+    {
+        return new WithdrawnAssessment($this, $this->lockReason);
+    }
 }
