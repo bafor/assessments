@@ -8,6 +8,7 @@ use System\Assessment;
 use System\Evaluation\EvaluationResult;
 use System\LockReason;
 use System\SuspendedAssessment;
+use System\WithdrawnAssessment;
 use Tests\Util\EvaluationBuilder;
 
 class AssessmentTest extends TestCase
@@ -48,6 +49,20 @@ class AssessmentTest extends TestCase
 
         self::assertInstanceOf(SuspendedAssessment::class, $suspendedAssessment);
         self::assertEquals($lockReason, $suspendedAssessment->lockReason);
+    }
+
+    /** @test */
+    public function shouldHavePossibilityToBeWithdrawn(): void
+    {
+        // BR 10. It is possible to lock the assessment by suspension or withdrawn.
+
+        $assessment          = new Assessment(EvaluationBuilder::new()->build());
+        $lockReason          = new LockReason('big rules violation');
+
+        $withdrawnAssessment = $assessment->withdraw($lockReason);
+
+        self::assertInstanceOf(WithdrawnAssessment::class, $withdrawnAssessment);
+        self::assertEquals($lockReason, $withdrawnAssessment->lockReason);
     }
 
 }

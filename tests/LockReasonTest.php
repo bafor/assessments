@@ -9,7 +9,6 @@ use System\ReasonIsNotDescriptive;
 
 class LockReasonTest extends TestCase
 {
-
     /** @test */
     public function shouldCreate(): void
     {
