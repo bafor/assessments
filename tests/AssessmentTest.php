@@ -18,7 +18,6 @@ class AssessmentTest extends TestCase
         $assessment = new Assessment(EvaluationBuilder::new()->build());
 
         self::assertInstanceOf(Assessment::class, $assessment);
-        self::assertFalse($assessment->isExpired());
     }
 
     /** @test */
@@ -31,34 +30,5 @@ class AssessmentTest extends TestCase
         self::assertEquals($evaluationResult, $assessment->rating());
 
     }
-
-    /** @test */
-    public function shouldExpireAfterEvaluationExceeded(): void
-    {
-        $evaluationDate = EvaluationDateBuilder::new()
-                                               ->daysAgo(Assessment::EXPIRATION_DAYS + 1)
-                                               ->build();
-
-        $assessment = new Assessment(
-            EvaluationBuilder::new()->withEvaluationDate($evaluationDate)->build()
-        );
-
-        self::assertTrue($assessment->isExpired());
-    }
-
-    /** @test */
-    public function shouldBeValidWithOnTheLastDay(): void
-    {
-        $evaluationDate = EvaluationDateBuilder::new()
-                                               ->daysAgo(Assessment::EXPIRATION_DAYS)
-                                               ->build();
-
-        $assessment = new Assessment(
-            EvaluationBuilder::new()->withEvaluationDate($evaluationDate)->build()
-        );
-
-        self::assertFalse($assessment->isExpired());
-    }
-
 
 }

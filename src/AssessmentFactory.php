@@ -5,9 +5,14 @@ namespace System;
 
 class AssessmentFactory
 {
-
-    public function create(Evaluation $evaluation): AbstractAssessment
+    public function make(Evaluation $evaluation): AbstractAssessment
     {
+        $expirationDate = new ExpirationDate($evaluation->evaluationDate);
+
+        if ($expirationDate->isExceeded()) {
+            return new ExpiredAssessment($evaluation);
+        }
+
         return new Assessment($evaluation);
     }
 }
