@@ -6,6 +6,8 @@ namespace Tests;
 use PHPUnit\Framework\TestCase;
 use System\Assessment;
 use System\Evaluation\EvaluationResult;
+use System\LockReason;
+use System\SuspendedAssessment;
 use Tests\Util\EvaluationBuilder;
 
 class AssessmentTest extends TestCase
@@ -28,6 +30,18 @@ class AssessmentTest extends TestCase
         self::assertInstanceOf(Assessment::class, $assessment);
         self::assertEquals($evaluationResult, $assessment->rating());
 
+    }
+
+    /** @test */
+    public function shouldHavePossibilityToBeSuspended(): void
+    {
+        $assessment          = new Assessment(EvaluationBuilder::new()->build());
+        $lockReason          = new LockReason('rules violation');
+
+        $suspendedAssessment = $assessment->suspend($lockReason);
+
+        self::assertInstanceOf(SuspendedAssessment::class, $suspendedAssessment);
+        self::assertEquals($lockReason, $suspendedAssessment->lockReason);
     }
 
 }

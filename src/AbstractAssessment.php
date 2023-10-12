@@ -8,11 +8,11 @@ use System\Evaluation\EvaluationResult;
 
 readonly abstract class AbstractAssessment
 {
-    public function __construct(private Evaluation $evaluation)
+    public function __construct(protected Evaluation $evaluation)
     {
     }
 
-    public function rating(): EvaluationResult // todo It separated from Evaluation result
+    public function rating(): EvaluationResult // todo separate it from Evaluation result
     {
         return $this->evaluation->evaluationResult;
     }
