@@ -17,9 +17,7 @@ class EvaluationBuilder
         private EvaluationResult   $evaluationResult = EvaluationResult::Positive
     )
     {
-        $this->supervisor = new class() implements Supervisor {
-        };
-
+        $this->supervisor = SupervisorBuilder::new()->build();
     }
 
     public static function new(): self

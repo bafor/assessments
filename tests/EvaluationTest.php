@@ -8,6 +8,7 @@ use System\Evaluation;
 use System\EvaluationResult;
 use System\Supervisor;
 use Tests\Util\EvaluationDateBuilder;
+use Tests\Util\SupervisorBuilder;
 
 class EvaluationTest extends TestCase
 {
@@ -19,18 +20,11 @@ class EvaluationTest extends TestCase
 
         $evaluation = new Evaluation(
             evaluationDate  : EvaluationDateBuilder::new()->now()->build(),
-            supervisor      : $this->mockSupervisor(),
+            supervisor      : SupervisorBuilder::new()->build(),
             evaluationResult: $evaluationResult
         );
 
         self::assertInstanceOf(Evaluation::class, $evaluation);
         self::assertSame($evaluationResult, $evaluation->evaluationResult);
-    }
-
-
-    private function mockSupervisor(): Supervisor
-    {
-        return new class() implements Supervisor {
-        };
     }
 }
