@@ -93,7 +93,7 @@ class EvaluationTest extends TestCase
     }
 
     /** @test */
-    public function itCanNotBeRevaluateAfter30DaysAndNegativeResult(): void
+    public function itCanBeRevaluateAfter30DaysAndNegativeResult(): void
     {
         // BR 19. Subsequent evaluation may be conducted after a period of not less than 180
         //days for evaluation completed with a positive result and 30 days for evaluation

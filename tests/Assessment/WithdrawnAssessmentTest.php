@@ -12,7 +12,7 @@ use Tests\Util\AssessmentBuilder;
 class WithdrawnAssessmentTest extends TestCase
 {
     /** @test */
-    public function shouldCreate(): void
+    public function shouldCreateFromAssessment(): void
     {
         $assessment = new WithdrawnAssessment(AssessmentBuilder::new()->build(), new LockReason('very avg reason'));
 
