@@ -40,6 +40,10 @@ class EvaluationTest extends TestCase
     /** @test */
     public function itCanBeRevaluateAfter180DaysAndPositiveResult(): void
     {
+        // BR 19. Subsequent evaluation may be conducted after a period of not less than 180
+        //days for evaluation completed with a positive result and 30 days for evaluation
+        //completed with a negative result
+
         $evaluationResult = EvaluationResult::Positive;
 
         $evaluation = new Evaluation(
@@ -54,6 +58,10 @@ class EvaluationTest extends TestCase
     /** @test */
     public function itCanNotBeRevaluateBefore180DaysAndPositiveResult(): void
     {
+        // BR 19. Subsequent evaluation may be conducted after a period of not less than 180
+        //days for evaluation completed with a positive result and 30 days for evaluation
+        //completed with a negative result
+
         $evaluationResult = EvaluationResult::Positive;
 
         $evaluation = new Evaluation(
@@ -68,6 +76,11 @@ class EvaluationTest extends TestCase
     /** @test */
     public function itCanNotBeRevaluateBefore30DaysAndNegativeResult(): void
     {
+        // BR 19. Subsequent evaluation may be conducted after a period of not less than 180
+        //days for evaluation completed with a positive result and 30 days for evaluation
+        //completed with a negative result
+
+
         $evaluationResult = EvaluationResult::Negative;
 
         $evaluation = new Evaluation(
@@ -82,6 +95,11 @@ class EvaluationTest extends TestCase
     /** @test */
     public function itCanNotBeRevaluateAfter30DaysAndNegativeResult(): void
     {
+        // BR 19. Subsequent evaluation may be conducted after a period of not less than 180
+        //days for evaluation completed with a positive result and 30 days for evaluation
+        //completed with a negative result
+
+
         $evaluationResult = EvaluationResult::Negative;
 
         $evaluation = new Evaluation(

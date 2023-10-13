@@ -7,11 +7,15 @@ use PHPUnit\Framework\TestCase;
 use System\Assessment\Assessment;
 use System\Assessment\SuspendedAssessment;
 use System\Assessment\WithdrawnAssessment;
+use System\AssessmentCanNotBeEvaluatedUntil;
+use System\Evaluation\Evaluation;
 use System\Evaluation\EvaluationResult;
 use System\LockReason;
 use System\Standard\Standard;
+use System\SupervisorHasNoAuthorityInStandard;
 use Tests\Util\EvaluationBuilder;
 use Tests\Util\StandardBuilder;
+use Tests\Util\SupervisorBuilder;
 
 class AssessmentTest extends TestCase
 {
@@ -39,8 +43,8 @@ class AssessmentTest extends TestCase
     {
         // BR 8. Upon completion of evaluation the assessment can have positive or negative ratings.
 
-        $evaluationResult     = EvaluationResult::Positive;
-        $assessment = new Assessment($this->standard, EvaluationBuilder::new()->withEvaluationResult($evaluationResult)->build());
+        $evaluationResult = EvaluationResult::Positive;
+        $assessment       = new Assessment($this->standard, EvaluationBuilder::new()->withEvaluationResult($evaluationResult)->build());
 
         self::assertEquals($evaluationResult, $assessment->rating());
     }
@@ -50,8 +54,8 @@ class AssessmentTest extends TestCase
     {
         // BR 10. It is possible to lock the assessment by suspension or withdrawn.
 
-        $assessment          = $this->createAssessment();
-        $lockReason          = new LockReason('rules violation');
+        $assessment = $this->createAssessment();
+        $lockReason = new LockReason('rules violation');
 
         $suspendedAssessment = $assessment->suspend($lockReason);
 
@@ -64,8 +68,8 @@ class AssessmentTest extends TestCase
     {
         // BR 10. It is possible to lock the assessment by suspension or withdrawn.
 
-        $assessment          = $this->createAssessment();
-        $lockReason          = new LockReason('big rules violation');
+        $assessment = $this->createAssessment();
+        $lockReason = new LockReason('big rules violation');
 
         $withdrawnAssessment = $assessment->withdraw($lockReason);
 
@@ -73,9 +77,57 @@ class AssessmentTest extends TestCase
         self::assertEquals($lockReason, $withdrawnAssessment->lockReason);
     }
 
-    private function createAssessment(): Assessment
+    /** @test */
+    public function itCanNotBeRevaluateBySupervisorWithoutAuthority(): void
     {
-        return new Assessment($this->standard, EvaluationBuilder::new()->build());
+        $assessment = $this->createAssessment(EvaluationBuilder::new()->tookPlaceDaysAgo(days: 500)->build());
+        $supervisor = SupervisorBuilder::new()->withNoAuthority()->build();
+
+        $this->expectException(SupervisorHasNoAuthorityInStandard::class);
+        $assessment->evaluate($supervisor, result: EvaluationResult::Positive);
+    }
+
+    /** @test */
+    public function itCanBeRevaluateBySupervisorWithAuthority(): void
+    {
+        $previousEvaluation = EvaluationBuilder::new()
+                                               ->tookPlaceDaysAgo(days: 500)
+                                               ->withEvaluationResult(EvaluationResult::Negative)
+                                               ->build();
+
+        $assessment = $this->createAssessment($previousEvaluation);
+        $supervisor = SupervisorBuilder::new()->withAuthorityInAllStandards()->build();
+
+        $evaluatedAssessment = $assessment->evaluate($supervisor, result: EvaluationResult::Positive);
+
+        self::assertSame(EvaluationResult::Positive, $evaluatedAssessment->rating());
+    }
+
+    /** @test */
+    public function itCanNotBeRevaluateBeforeRequireDate(): void
+    {
+        // BR 19. Subsequent evaluation may be conducted after a period of not less than 180
+        //days for evaluation completed with a positive result and 30 days for evaluation
+        //completed with a negative result
+
+        $previousEvaluation = EvaluationBuilder::new()
+                                               ->tookPlaceDaysAgo(days: 2)
+                                               ->withEvaluationResult(EvaluationResult::Negative)
+                                               ->build();
+
+        $assessment = $this->createAssessment($previousEvaluation);
+        $supervisor = SupervisorBuilder::new()->withAuthorityInAllStandards()->build();
+
+        $this->expectException(AssessmentCanNotBeEvaluatedUntil::class);
+
+        $assessment->evaluate($supervisor, result: EvaluationResult::Positive);
+    }
+
+    private function createAssessment(?Evaluation $evaluation = null): Assessment
+    {
+        $evaluation ??= EvaluationBuilder::new()->build();
+
+        return new Assessment($this->standard, $evaluation);
     }
 
 }

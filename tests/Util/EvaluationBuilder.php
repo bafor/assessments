@@ -25,6 +25,12 @@ class EvaluationBuilder
         return new self();
     }
 
+    public function tookPlaceDaysAgo(int $days): self
+    {
+        $this->evaluationDate = new \DateTimeImmutable("-$days days");
+        return $this;
+    }
+
     public function withEvaluationResult(EvaluationResult $result): self
     {
         $this->evaluationResult = $result;

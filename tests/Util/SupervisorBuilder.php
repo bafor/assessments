@@ -20,6 +20,19 @@ class SupervisorBuilder
         return new self();
     }
 
+    public function withAuthorityInAllStandards(): self
+    {
+        $this->hasAuthority = true;
+        return $this;
+    }
+
+    public function withNoAuthority(): self
+    {
+        $this->hasAuthority = false;
+        return $this;
+    }
+
+
     public function build(): Supervisor
     {
         return new class($this->hasAuthority) implements Supervisor {
