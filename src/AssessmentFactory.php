@@ -10,14 +10,14 @@ use System\Evaluation\Evaluation;
 
 class AssessmentFactory
 {
-    public function make(Evaluation $evaluation): AbstractAssessment
+    public function make(Standard $standard, Evaluation $evaluation): AbstractAssessment
     {
         $expirationDate = new ExpirationDate($evaluation->evaluationDate);
 
         if ($expirationDate->isExceeded()) {
-            return new ExpiredAssessment($evaluation);
+            return new ExpiredAssessment($standard, $evaluation);
         }
 
-        return new Assessment($evaluation);
+        return new Assessment($standard, $evaluation);
     }
 }

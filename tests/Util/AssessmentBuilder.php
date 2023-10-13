@@ -14,6 +14,6 @@ class AssessmentBuilder
 
     public function build(): Assessment
     {
-        return new Assessment(EvaluationBuilder::new()->build());
+        return new Assessment(StandardBuilder::new()->build(), EvaluationBuilder::new()->build());
     }
 }

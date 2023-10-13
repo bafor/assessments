@@ -9,7 +9,7 @@ final readonly class SuspendedAssessment extends AbstractAssessment
 {
     public function __construct(Assessment $assessment, public LockReason $lockReason)
     {
-        parent::__construct($assessment->evaluation);
+        parent::__construct($assessment->standard, $assessment->evaluation);
     }
 
     public function withdraw(): WithdrawnAssessment
@@ -19,6 +19,6 @@ final readonly class SuspendedAssessment extends AbstractAssessment
 
     public function unlock(): Assessment
     {
-        return new Assessment($this->evaluation);
+        return new Assessment($this->standard, $this->evaluation);
     }
 }

@@ -5,20 +5,25 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use System\Assessment\AbstractAssessment;
+use System\Assessment\Assessment;
 use System\Assessment\ExpiredAssessment;
 use System\AssessmentFactory;
+use System\Standard;
 use Tests\Util\EvaluationBuilder;
 use Tests\Util\EvaluationDateBuilder;
+use Tests\Util\StandardBuilder;
 
 class AssessmentFactoryTest extends TestCase
 {
     private AssessmentFactory $assessmentFactory;
+    private Standard  $standard;
 
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->assessmentFactory = new AssessmentFactory();
+        $this->standard = StandardBuilder::new()->build();
     }
 
     /** @test */
@@ -26,7 +31,9 @@ class AssessmentFactoryTest extends TestCase
     {
         $evaluation = EvaluationBuilder::new()->build();
 
-        self::assertInstanceOf(AbstractAssessment::class, $this->assessmentFactory->make($evaluation));
+        $assessment = $this->assessmentFactory->make($this->standard, $evaluation);
+        self::assertInstanceOf(Assessment::class, $assessment);
+        self::assertSame($this->standard, $assessment->standard);
     }
 
     /** @test */
@@ -36,7 +43,9 @@ class AssessmentFactoryTest extends TestCase
         $evaluationDate = EvaluationDateBuilder::new()->daysAgo(1000)->build();
         $evaluation     = EvaluationBuilder::new()->withEvaluationDate($evaluationDate)->build();
 
-        self::assertInstanceOf(ExpiredAssessment::class, $this->assessmentFactory->make($evaluation));
+        $assessment = $this->assessmentFactory->make($this->standard, $evaluation);
+        self::assertInstanceOf(ExpiredAssessment::class, $assessment);
+        self::assertSame($this->standard, $assessment->standard);
     }
 
 }

@@ -18,7 +18,6 @@ class SuspendedAssessmentTest extends TestCase
         $lockReason = new LockReason('very good reason');
         $assessment = new SuspendedAssessment(AssessmentBuilder::new()->build(), $lockReason);
 
-        self::assertInstanceOf(SuspendedAssessment::class, $assessment);
         self::assertSame($lockReason, $assessment->lockReason);
     }
 

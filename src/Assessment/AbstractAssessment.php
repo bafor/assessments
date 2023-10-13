@@ -5,10 +5,11 @@ namespace System\Assessment;
 
 use System\Evaluation\Evaluation;
 use System\Evaluation\EvaluationResult;
+use System\Standard;
 
 readonly abstract class AbstractAssessment
 {
-    public function __construct(protected Evaluation $evaluation)
+    public function __construct(public Standard $standard, protected Evaluation $evaluation)
     {
     }
 
