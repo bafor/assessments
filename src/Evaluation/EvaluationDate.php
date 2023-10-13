@@ -11,4 +11,9 @@ final readonly class EvaluationDate
             throw new \InvalidArgumentException('Evaluation date cannot be in the future');
         }
     }
+
+    public function daysSinceEvaluation(): int
+    {
+        return (int) $this->evaluationDate->diff(new \DateTimeImmutable('now'))->format('%a');
+    }
 }

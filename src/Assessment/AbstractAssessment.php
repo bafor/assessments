@@ -6,6 +6,7 @@ namespace System\Assessment;
 use System\Evaluation\Evaluation;
 use System\Evaluation\EvaluationResult;
 use System\Standard;
+use System\Supervisor;
 
 readonly abstract class AbstractAssessment
 {
@@ -17,5 +18,4 @@ readonly abstract class AbstractAssessment
     {
         return $this->evaluation->evaluationResult;
     }
-
 }

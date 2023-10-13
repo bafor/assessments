@@ -12,8 +12,8 @@ class EvaluationDateTest extends TestCase
     /** @test */
     public function shouldCreate(): void
     {
-        $date = new \DateTimeImmutable();
-        $evaluationDate  = new EvaluationDate($date);
+        $date           = new \DateTimeImmutable();
+        $evaluationDate = new EvaluationDate($date);
 
         self::assertInstanceOf(EvaluationDate::class, $evaluationDate);
         self::assertSame($date, $evaluationDate->evaluationDate);
@@ -25,6 +25,16 @@ class EvaluationDateTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
 
         new EvaluationDate(evaluationDate: new \DateTimeImmutable('tomorrow'));
+    }
+
+    /** @test */
+    public function shouldReturnNumberOfDaysSinceEvaluation(): void
+    {
+        $daysSinceEvaluation = 10;
+
+        $evaluationDate = new EvaluationDate(new \DateTimeImmutable($daysSinceEvaluation . ' days ago'));
+
+        self::assertSame($daysSinceEvaluation, $evaluationDate->daysSinceEvaluation());
     }
 
 }
