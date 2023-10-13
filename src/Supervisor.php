@@ -5,4 +5,5 @@ namespace System;
 
 interface Supervisor
 {
+    public function hasAuthority(Standard $standard): bool;
 }

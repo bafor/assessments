@@ -7,7 +7,6 @@ use System\Supervisor;
 
 readonly class Evaluation
 {
-
     public function __construct(
         public EvaluationDate $evaluationDate,
         private Supervisor         $supervisor,
