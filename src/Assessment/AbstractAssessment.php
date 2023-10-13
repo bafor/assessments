@@ -5,8 +5,7 @@ namespace System\Assessment;
 
 use System\Evaluation\Evaluation;
 use System\Evaluation\EvaluationResult;
-use System\Standard;
-use System\Supervisor;
+use System\Standard\Standard;
 
 readonly abstract class AbstractAssessment
 {

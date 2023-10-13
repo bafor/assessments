@@ -4,11 +4,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-use System\Assessment\AbstractAssessment;
 use System\Assessment\Assessment;
 use System\Assessment\ExpiredAssessment;
 use System\AssessmentFactory;
-use System\Standard;
+use System\Standard\Standard;
 use Tests\Util\EvaluationBuilder;
 use Tests\Util\EvaluationDateBuilder;
 use Tests\Util\StandardBuilder;

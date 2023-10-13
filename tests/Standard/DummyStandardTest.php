@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Standard;
 
-use System\DummyStandard;
 use PHPUnit\Framework\TestCase;
-use System\Standard;
+use System\Standard\DummyStandard;
+use System\Standard\Standard;
 
 class DummyStandardTest extends TestCase
 {

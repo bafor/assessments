@@ -9,7 +9,7 @@ use System\Assessment\SuspendedAssessment;
 use System\Assessment\WithdrawnAssessment;
 use System\Evaluation\EvaluationResult;
 use System\LockReason;
-use System\Standard;
+use System\Standard\Standard;
 use Tests\Util\EvaluationBuilder;
 use Tests\Util\StandardBuilder;
 

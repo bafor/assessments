@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Tests\Util;
 
-use System\DummyStandard;
-use System\Standard;
+use System\Standard\DummyStandard;
+use System\Standard\Standard;
 
 class StandardBuilder
 {

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Util;
 
-use System\Standard;
+use System\Standard\Standard;
 use System\Supervisor;
 
 class SupervisorBuilder
